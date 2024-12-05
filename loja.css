@@ -1,0 +1,120 @@
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* Fundo escuro mais sutil */
+  padding-top: 20px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+/* Conteúdo do Modal */
+.modal-content {
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0); /* Fundo suave em cinza claro */
+  margin: 5% auto;
+  padding: 25px 35px;
+  border: 2px solid #6C63FF; /* Borda roxa suave */
+  width: 85%;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: slideDown 0.4s ease-out;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Título da loja */
+.modal-content h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #6C63FF; /* Roxo suave */
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 8px rgba(108, 99, 255, 0.8);
+}
+
+/* Fechar o Modal */
+.close {
+  color: #6C63FF;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.close:hover {
+  color: #FF6584; /* Rosa claro ao passar o mouse */
+  transform: scale(1.2);
+}
+
+/* Estilo dos itens da loja */
+.shop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: linear-gradient(to top right, #ffffff, #f0f0f5); /* Fundo neutro suave */
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  transition: transform 0.3s, box-shadow 0.3s ease;
+}
+
+.shop-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Botões da loja */
+.shop-item button {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 12px;
+  background: linear-gradient(to right, #6C63FF, #9F86FF); /* Gradiente roxo suave */
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.shop-item button:hover {
+  background: linear-gradient(to right, #9F86FF, #C3B5FF); /* Tons mais claros ao passar o mouse */
+  transform: scale(1.1);
+}
+
+.shop-item button:active {
+  transform: scale(0.95); /* Efeito ao clicar */
+}
+
+/* Descrição dos itens */
+.shop-item p {
+  font-size: 15px;
+  margin-top: 10px;
+  color: #4A4A4A; /* Cinza escuro */
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

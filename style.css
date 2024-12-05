@@ -1,0 +1,481 @@
+/* Estilo geral do body */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('https://i.imgur.com/oKSNu4f.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  animation: fadeBackground 10s infinite;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Informações de status */
+#info {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#money-info, #milkshake-info, #rebirth-info {
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.7);
+  color: #FFD700;
+  border-radius: 20px;
+  border: 2px solid #FFD700;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  width: 20%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+#money-info:hover, #milkshake-info:hover, #rebirth-info:hover {
+  transform: scale(1.1);
+  background: rgba(255, 215, 0, 0.9);
+}
+
+/* Botões gerais */
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #4CAF50, #2E8B57);
+  color: white;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(72, 239, 128, 0.4);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin: 10px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #3e8e41, #2a6e39);
+  transform: scale(1.1);
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(72, 239, 128, 0.6);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3), 0 0 8px rgba(72, 239, 128, 0.5);
+}
+
+/* Botão Rebirth */
+#rebirth-button {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border: 2px solid #ffffff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#rebirth-button:hover {
+  background: linear-gradient(135deg, #FFC300, #FF8C00);
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+/* Banana */
+/* Container da Banana */
+#banana-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+/* Banana Interativa */
+#banana {
+  font-size: 100px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: 0 0 10px rgba(255, 255, 0, 0.5), 0 0 20px rgba(255, 223, 0, 0.7);
+}
+
+#banana:hover {
+  transform: scale(1.2) rotate(10deg);
+  text-shadow: 0 0 15px rgba(255, 255, 0, 0.7), 0 0 30px rgba(255, 223, 0, 0.9);
+}
+
+/* Animação Glow */
+@keyframes glow {
+  0% {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 223, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 0, 0.8);
+  }
+}
+
+/* Barra de progresso */
+#progress-bar {
+  width: 80%;
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+#progress-fill {
+  height: 100%;
+  background: #28a745;
+  width: 0;
+  transition: width 0.5s;
+}
+
+/* Feedback de compra como conquista */
+.purchase-feedback {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro para destaque */
+  color: white; /* Texto branco para contraste */
+  padding: 20px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o emoji e o texto */
+  transition: opacity 1s ease-out, transform 0.3s ease-out;
+}
+
+.purchase-feedback.fade-out {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px);
+}
+
+/* Estilo do emoji em feedback */
+.purchase-feedback .emoji {
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white; /* Fundo branco para destacar o emoji */
+  border-radius: 50%; /* Forma circular */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Leve brilho em volta */
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* Animação de bounce no emoji */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Mensagens de erro estilo conquista */
+.error-message {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 87, 34, 0.9); /* Fundo avermelhado com transparência */
+  color: white;
+  padding: 20px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o emoji e o texto */
+  opacity: 1;
+  transition: opacity 1s ease-out, transform 0.3s ease-out;
+}
+
+.error-message.fade-out {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px);
+}
+
+/* Emoji na mensagem de erro */
+.error-message .emoji {
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white; /* Fundo branco para destacar o emoji */
+  border-radius: 50%; /* Forma circular */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Leve brilho em volta */
+}
+
+/* Animação de shake para ênfase */
+.error-message.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  25% { transform: translateX(-50%) translateY(-5px); }
+  50% { transform: translateX(-50%) translateY(5px); }
+  75% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* Animação de moedas */
+.coin {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Partículas de banana */
+.banana-particle {
+  position: absolute;
+  font-size: 24px;
+  animation: fall 1s linear forwards;
+  pointer-events: none;
+  opacity: 1;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(200px); /* Define a distância de queda */
+  }
+}
+
+.banana-skin-default { color: yellow; }
+.banana-skin-golden { color: gold; }
+.banana-skin-pixel { font-family: "Courier New", Courier, monospace; color: brown; }
+
+/* Efeitos de hover e interação nos botões */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 10px #FFD700; /* Destaque de foco dourado */
+}
+
+/* Adicionando sombras nos botões para maior profundidade */
+button {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+button:hover {
+  background-color: #45a049;
+  transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+#banana {
+  font-size: 100px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+#banana:hover {
+  transform: scale(1.1);
+}
+
+#eventMessage {
+  position: fixed;
+  top: 10%; /* Subir mais para o topo */
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(255, 69, 58, 0.9), rgba(255, 0, 0, 0.8)); /* Gradiente para maior impacto */
+  color: white; /* Texto em branco */
+  font-size: 24px;
+  font-weight: bold;
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Sombra mais profunda */
+  animation: fadeIn 0.5s ease-in-out, pulse 1s infinite; /* Animação de pulsar */
+  z-index: 1001; /* Garantir que fique acima de outros elementos */
+  text-align: center; /* Centraliza o texto */
+}
+
+/* Estilo para o countdown */
+#countdown {
+  font-size: 30px;
+  font-weight: bold;
+  color: red;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(255, 0, 0, 0.7); /* Fundo vermelho com transparência */
+  width: 100px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Estilo das notificações de Conquista, Sucesso e Erro */
+.notification {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333; /* Fundo escuro para destacar */
+  color: white;
+  padding: 20px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease-out, transform 0.5s ease-out;
+  width: auto;
+  max-width: 350px;
+  animation: slideIn 0.5s ease-out; /* A animação de entrada */
+}
+
+/* Animação de entrada do estilo PS5 */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-50%) translateY(30px); /* Começa um pouco mais abaixo */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0); /* Move para a posição final */
+    opacity: 1;
+  }
+}
+
+/* Estilo das notificações de Conquista, Sucesso e Erro */
+.notification {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333; /* Fundo escuro para destacar */
+  color: white;
+  padding: 20px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease-out, transform 0.5s ease-out;
+  width: auto;
+  max-width: 350px;
+  animation: slideIn 0.5s ease-out; /* A animação de entrada */
+}
+
+/* Animação de entrada do estilo PS5 */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-50%) translateY(30px); /* Começa um pouco mais abaixo */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0); /* Move para a posição final */
+    opacity: 1;
+  }
+}
+
+/* Bolinha branca ao redor do emoji */
+.notification .emoji {
+  font-size: 30px;
+  background-color: white;
+  color: #4CAF50; /* Verde para sucesso */
+  border-radius: 50%;
+  padding: 12px;
+  margin-right: 15px; /* Espaço entre emoji e o texto */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Alteração para emojis de erro */
+.notification.error .emoji {
+  background-color: white;
+  color: #FF5722; /* Vermelho para erro */
+}
+
+/* Alteração para emojis de sucesso */
+.notification.success .emoji {
+  background-color: white;
+  color: #4CAF50; /* Verde para sucesso */
+}
+
+/* Alteração para emojis de conquista */
+.notification.conquest .emoji {
+  background-color: white;
+  color: #FFD700; /* Amarelo para conquista */
+}
+
+/* Animação de fade-out */
+.notification.fade-out {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px); /* Move para cima enquanto desaparece */
+}
+
+/* Transições suaves para os elementos */
+.notification.success {
+  background-color: #4CAF50; /* Verde para sucesso */
+}
+
+.notification.error {
+  background-color: #FF5722; /* Vermelho para erro */
+}
+
+.notification.conquest {
+  background-color: #FFD700; /* Amarelo para conquista */
+}
+
+/* Container para a chuva de bananas */
+#banana-rain-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Evita que o usuário interaja com a chuva */
+  z-index: 9998;
+}
+
+/* Animação da chuva de bananas */
+@keyframes fall {
+  0% {
+    transform: translateY(-100px); /* Começa fora da tela */
+  }
+  100% {
+    transform: translateY(100vh); /* Vai até o fundo da tela */
+  }
+}
+
+/* Estilo dos emojis caindo */
+.banana-emoji {
+  position: absolute;
+  font-size: 30px; /* Tamanho dos emojis */
+  animation: fall linear infinite;
+  opacity: 1;
+  animation-duration: 3s; /* Duração da queda */
+  animation-timing-function: ease-in;
+}
