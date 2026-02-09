@@ -70,6 +70,13 @@ button:active {
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3), 0 0 8px rgba(72, 239, 128, 0.5);
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
 /* Botão Rebirth */
 #rebirth-button {
   background: linear-gradient(135deg, #FFD700, #FFA500);
