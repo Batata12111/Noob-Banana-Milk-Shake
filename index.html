@@ -22,7 +22,7 @@
 
   <!-- Banana Button -->
   <div id="banana-container">
-    <div id="banana" onclick="clickBanana()">🍌</div>
+    <div id="banana" role="button" tabindex="0" aria-label="Click the banana to earn coins" onclick="clickBanana()">🍌</div>
   </div>
 
   <!-- Progress Bar -->
@@ -41,7 +41,7 @@
   <!-- Shop Modal -->
   <div id="shopModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeShopModal()">&times;</span>
+      <span id="closeShop" class="close" onclick="closeShopModal()">&times;</span>
       <h2>🛒 Shop 🛒</h2>
       <!-- New item Auto Clicker -->
       <div class="shop-item">
@@ -78,10 +78,6 @@
 
   <script src="firebase-config.js"></script>
   <script src="script.js"></script>
-  <script src="loj.js"></script>
-  <script src="event.js"></script>
-  <script src="mai.js"></script>
-  <script src="util.js"></script>
   <script src="leaderboard.js"></script>
 </body>
 </html>
