@@ -1,4 +1,3 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/script.js b/script.js
 index 2be289ebd1cc500477f9648afe4658eb2ae059f8..27b5ff93aaeb62d0784245bd114732ac4e3b7f0a 100644
 --- a/script.js
@@ -789,6 +788,3 @@ index 2be289ebd1cc500477f9648afe4658eb2ae059f8..27b5ff93aaeb62d0784245bd114732ac
 -}
 \ No newline at end of file
 +initGame();
- 
-EOF
-)
