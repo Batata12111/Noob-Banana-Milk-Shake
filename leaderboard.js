@@ -3,10 +3,13 @@ let playerName = '';
 
 // Função para inicializar a leaderboard
 function initLeaderboard() {
-  const leaderboardButton = document.createElement('button');
-  leaderboardButton.id = 'leaderboardButton';
-  leaderboardButton.textContent = 'Leaderboard';
-  document.body.appendChild(leaderboardButton);
+  let leaderboardButton = document.getElementById('leaderboardButton');
+  if (!leaderboardButton) {
+    leaderboardButton = document.createElement('button');
+    leaderboardButton.id = 'leaderboardButton';
+    leaderboardButton.textContent = 'Leaderboard';
+    document.body.appendChild(leaderboardButton);
+  }
 
   leaderboardButton.addEventListener('click', handleLeaderboardClick);
 

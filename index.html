@@ -10,32 +10,97 @@
 </head>
 <body>
 
-  <!-- Status Information -->
-  <div id="info">
-    <div id="money-info"> 🪙 <span id="money">0</span></div>
-    <div id="milkshake-info"> 🧋 <span id="milkshakes">0</span></div>
-    <div id="rebirth-info"> 🔄 <span id="rebirths">0</span></div>
-  </div>
-  
-   <!-- Container da chuva de bananas -->
-<div id="banana-rain-container"></div>
+  <div class="game-shell">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-emoji">🍌</span>
+        <div>
+          <h1>Banana Milk-Shake</h1>
+          <p>Click, upgrade, and dominate the banana economy.</p>
+        </div>
+      </div>
+      <div id="info" class="stat-grid">
+        <div id="money-info" class="stat-card">
+          <span class="stat-label">Coins</span>
+          <span class="stat-value">🪙 <span id="money">0</span></span>
+        </div>
+        <div id="milkshake-info" class="stat-card">
+          <span class="stat-label">Milkshakes</span>
+          <span class="stat-value">🧋 <span id="milkshakes">0</span></span>
+        </div>
+        <div id="rebirth-info" class="stat-card">
+          <span class="stat-label">Rebirths</span>
+          <span class="stat-value">🔄 <span id="rebirths">0</span></span>
+        </div>
+      </div>
+    </header>
 
-  <!-- Banana Button -->
-  <div id="banana-container">
-    <div id="banana" role="button" tabindex="0" aria-label="Click the banana to earn coins" onclick="clickBanana()">🍌</div>
-  </div>
+    <main class="game-grid">
+      <aside class="side-panel">
+        <button class="menu-button active" data-panel="shop">🛒 Loja</button>
+        <button class="menu-button" data-panel="events">⚡ Eventos</button>
+        <button class="menu-button" data-panel="leaderboard">🏆 Ranking</button>
+        <div class="quick-actions">
+          <button id="buy-shake" onclick="buyMilkshake()">🧋 Milk-shake = 30</button>
+          <button id="buy-upgrade" onclick="buyUpgrade()">🔧 Upgrade = 100</button>
+          <button id="rebirth-button" onclick="performRebirth()">🔄 Rebirth = 500</button>
+        </div>
+      </aside>
 
-  <!-- Progress Bar -->
-  <div id="progress-bar">
-    <div id="progress-fill"></div>
-  </div>
+      <section class="center-stage">
+        <!-- Container da chuva de bananas -->
+        <div id="banana-rain-container"></div>
 
-  <!-- Controls -->
-  <div id="controls">
-    <button id="buy-shake" onclick="buyMilkshake()">🧋 Milk-shake = 30</button>
-    <button id="buy-upgrade" onclick="buyUpgrade()">🔧 Upgrade = 100</button>
-    <button id="rebirth-button" onclick="performRebirth()">🔄 Rebirth = 500</button>
-    <button id="shopButton">🛒 Shop</button>
+        <!-- Banana Button -->
+        <div id="banana-container">
+          <div id="banana" role="button" tabindex="0" aria-label="Click the banana to earn coins" onclick="clickBanana()">🍌</div>
+        </div>
+
+        <div class="progress-wrapper">
+          <div class="progress-label">
+            <span>Próximo Milk-shake</span>
+            <span id="progress-text">0%</span>
+          </div>
+          <div id="progress-bar">
+            <div id="progress-fill"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel-stack">
+        <div id="shop-panel" class="panel-card active">
+          <div class="panel-header">
+            <h2>🛒 Loja</h2>
+            <p>Invista para turbinar sua produção.</p>
+          </div>
+          <div class="panel-actions">
+            <button id="shopButton">Abrir Loja Completa</button>
+          </div>
+          <div class="panel-list">
+            <div class="panel-item">🔄 Auto Clicker (500)</div>
+            <div class="panel-item">🍌 Golden Banana (800)</div>
+            <div class="panel-item">🏭 Milkshake Factory (1000)</div>
+            <div class="panel-item">🧲 Banana Magnet (1200)</div>
+            <div class="panel-item">⏳ Time Extender (1500)</div>
+            <div class="panel-item">🛡️ Banana Shield (2000)</div>
+          </div>
+        </div>
+        <div id="events-panel" class="panel-card">
+          <div class="panel-header">
+            <h2>⚡ Eventos</h2>
+            <p id="event-status">Nenhum evento ativo agora.</p>
+          </div>
+          <div id="event-log" class="event-log"></div>
+        </div>
+        <div id="leaderboard-panel" class="panel-card">
+          <div class="panel-header">
+            <h2>🏆 Ranking</h2>
+            <p>Compare seus ganhos com outros jogadores.</p>
+          </div>
+          <button id="leaderboardButton">Abrir Ranking</button>
+        </div>
+      </aside>
+    </main>
   </div>
 
   <!-- Shop Modal -->

@@ -35,13 +35,22 @@ const elements = {
   milkshakes: document.getElementById('milkshakes'),
   rebirths: document.getElementById('rebirths'),
   progressFill: document.getElementById('progress-fill'),
+  progressText: document.getElementById('progress-text'),
   buyShake: document.getElementById('buy-shake'),
   buyUpgrade: document.getElementById('buy-upgrade'),
   rebirthButton: document.getElementById('rebirth-button'),
   shopButton: document.getElementById('shopButton'),
   shopModal: document.getElementById('shopModal'),
   closeShop: document.getElementById('closeShop'),
-  banana: document.getElementById('banana')
+  banana: document.getElementById('banana'),
+  menuButtons: document.querySelectorAll('.menu-button'),
+  panels: {
+    shop: document.getElementById('shop-panel'),
+    events: document.getElementById('events-panel'),
+    leaderboard: document.getElementById('leaderboard-panel')
+  },
+  eventLog: document.getElementById('event-log'),
+  eventStatus: document.getElementById('event-status')
 };
 
 const dailyMissions = [
@@ -62,6 +71,9 @@ function syncGlobals() {
 function updateProgressBar() {
   const progress = Math.min(money / milkshakePrice, 1);
   elements.progressFill.style.width = `${Math.round(progress * 100)}%`;
+  if (elements.progressText) {
+    elements.progressText.textContent = `${Math.round(progress * 100)}%`;
+  }
 }
 
 function updateButtons() {
@@ -182,6 +194,7 @@ function buyMilkshake() {
   milkshakePrice = Math.ceil(milkshakePrice * 1.5);
   updateInfo();
   showNotification('You bought a Milkshake!', 'success');
+  logEvent('🧋 Milk-shake comprado. Produção aumentada.');
 }
 
 function buyUpgrade() {
@@ -196,6 +209,7 @@ function buyUpgrade() {
   updateInfo();
   trackMission('Buy 5 upgrades');
   showNotification('Upgrade purchased successfully!', 'success');
+  logEvent('🔧 Upgrade aplicado na produção.');
 }
 
 function performRebirth() {
@@ -214,6 +228,7 @@ function performRebirth() {
   updateInfo();
   trackMission('Complete a Rebirth');
   showNotification('Rebirth successfully completed!', 'success');
+  logEvent('🔄 Rebirth realizado! Seu progresso foi reiniciado.');
 }
 
 function buyAutoClicker() {
@@ -226,6 +241,7 @@ function buyAutoClicker() {
   autoClickers += 1;
   updateInfo();
   showNotification('Auto Clicker activated!', 'success');
+  logEvent('🔄 Auto Clicker comprado.');
 }
 
 function buyGoldenBanana() {
@@ -238,6 +254,7 @@ function buyGoldenBanana() {
   goldenBananaActive = true;
   updateInfo();
   showNotification('Golden Banana activated!', 'success');
+  logEvent('🍌 Golden Banana ativada por 30s.');
   setTimeout(() => {
     goldenBananaActive = false;
     updateInfo();
@@ -254,6 +271,7 @@ function buyMilkshakeFactory() {
   milkshakeFactories += 1;
   updateInfo();
   showNotification('Milkshake Factory is now producing!', 'success');
+  logEvent('🏭 Milkshake Factory ativa: renda passiva aumentou.');
 }
 
 function buyBananaMagnet() {
@@ -266,6 +284,7 @@ function buyBananaMagnet() {
   bananaMagnetLevel += 1;
   updateInfo();
   showNotification('Banana Magnet upgraded!', 'success');
+  logEvent('🧲 Banana Magnet melhorado.');
 }
 
 function buyTimeExtender() {
@@ -277,6 +296,7 @@ function buyTimeExtender() {
   money -= 1500;
   timeExtenderActive = true;
   showNotification('Time Extender activated! Special events will last 5 seconds longer', 'success');
+  logEvent('⏳ Time Extender ativado por 30s.');
   setTimeout(() => {
     timeExtenderActive = false;
   }, 30000);
@@ -292,6 +312,7 @@ function buyBananaShield() {
   money -= 2000;
   bananaShieldActive = true;
   showNotification('Banana Shield activated! You are protected from losing coins in failed events', 'success');
+  logEvent('🛡️ Banana Shield ativado por 30s.');
   setTimeout(() => {
     bananaShieldActive = false;
   }, 30000);
@@ -327,6 +348,19 @@ function showNotification(message, type) {
   setTimeout(() => {
     notification.remove();
   }, 5500);
+}
+
+function logEvent(message) {
+  if (!elements.eventLog) return;
+  const entry = document.createElement('div');
+  entry.className = 'event-entry';
+  entry.textContent = message;
+  elements.eventLog.prepend(entry);
+}
+
+function updateEventStatus(message) {
+  if (!elements.eventStatus) return;
+  elements.eventStatus.textContent = message;
 }
 
 function trackMission(missionType) {
@@ -375,6 +409,8 @@ function triggerRedBananaEvent() {
   eventMessage.id = 'eventMessage';
   eventMessage.textContent = 'RV has removed all his positions, quick click to get them back!';
   document.body.appendChild(eventMessage);
+  updateEventStatus('Evento ativo: clique rápido para recuperar posições!');
+  logEvent('⚡ Evento iniciado: Banana vermelha!');
 
   const countdown = document.createElement('div');
   countdown.id = 'countdown';
@@ -415,9 +451,12 @@ function resetRedBananaEvent(success) {
   if (success) {
     showNotification('You have recovered your positions and earned 25 coins!', 'success');
     money += 25;
+    logEvent('✅ Evento concluído com sucesso! +25 moedas.');
   } else {
     handleFailedEvent();
+    logEvent('❌ Evento falhou. Você perdeu moedas.');
   }
+  updateEventStatus('Nenhum evento ativo agora.');
 
   updateInfo();
 }
@@ -465,6 +504,16 @@ function bindEvents() {
   elements.shopButton.addEventListener('click', openShop);
   elements.closeShop.addEventListener('click', closeShopModal);
 
+  elements.menuButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const panelKey = button.dataset.panel;
+      if (!panelKey) return;
+      Object.values(elements.panels).forEach((panel) => panel.classList.remove('active'));
+      elements.panels[panelKey].classList.add('active');
+      elements.menuButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
+    });
+  });
+
   elements.shopModal.addEventListener('click', (event) => {
     if (event.target === elements.shopModal) {
       closeShopModal();
@@ -493,6 +542,8 @@ function initGame() {
   loadGame();
   bindEvents();
   updateInfo();
+  updateEventStatus('Nenhum evento ativo agora.');
+  logEvent('✨ Bem-vindo! Clique na banana para começar.');
   startAutoClickers();
   setInterval(generateIncome, 1000);
 }
